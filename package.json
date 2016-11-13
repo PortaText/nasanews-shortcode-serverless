@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.3.0",
+    "feedparser": "1.1.5",
+    "portatext": "~1.4",
+    "promise": "~7.1"
+  }
+}
