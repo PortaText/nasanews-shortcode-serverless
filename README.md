@@ -24,3 +24,8 @@ This code uses:
  and handle internal events.
  * [PortaText NodeJS SDK](https://github.com/PortaText/node-sdk) to handle campaigns and send messages.
  * Google URL Shortener service ([https://goo.gl/](https://goo.gl/)) to send a short url in the SMS messages.
+
+# License
+The source code is released under Apache 2 License.
+
+Check [LICENSE](https://github.com/PortaText/sns-lambda-example/blob/master/LICENSE) file for more information.

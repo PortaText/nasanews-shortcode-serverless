@@ -1,8 +1,47 @@
 {
+  "version": "0.0.1",
+  "description": "completely serverless demonstration of how to combine the PortaText service and API with Amazon AWS to create an SMS service in a short code",
+  "name": "nasanews-shortcode-serverless",
+  "keywords": [
+    "portatext",
+    "sms",
+    "client",
+    "official",
+    "sns",
+    "amazon",
+    "lambda"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/portatext/nasanews-shortcode-serverless",
+  "author": "PortaText",
+  "contributors": [
+    {
+      "name": "Marcelo Gornstein",
+      "email": "marcelog@portatext.com",
+      "url": "http://marcelog.github.io/"
+    }
+  ],
+  "files": [
+    "src",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "main": "src/index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/portatext/nasanews-shortcode-serverless"
+  },
   "dependencies": {
     "aws-sdk": "^2.3.0",
     "feedparser": "1.1.5",
     "portatext": "~1.4",
     "promise": "~7.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "bugs": {
+    "url": "https://github.com/portatext/nasanews-shortcode-serverless/issues",
+    "email": "hello@portatext.com"
   }
-}

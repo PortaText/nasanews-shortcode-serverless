@@ -8,10 +8,11 @@ const portatext = new (require('portatext')).ClientHttp();
 
 const feedUrl = 'https://www.nasa.gov/rss/dyn/breaking_news.rss';
 const googleApp = 'your-google-app-id';
-const googleKey = 'your-google-app-ley';
+const googleKey = 'your-google-app-key';
 const portatextKey = 'your-portatext-key';
-const smsServiceId = 00; // Your SMS service ID
-const templateId = 000; // Your template ID for the news
+const smsServiceId = 00; // Your SMS Service ID.
+const templateId = 000; // Your template ID en PortaText to send the news.
+const SNSTopic = 'your-arn-to-the-sns-topic-handling-campaing-creation';
 
 portatext.setApiKey(portatextKey);
 
@@ -157,9 +158,7 @@ function saveItem(item) {
           title: {Action: 'PUT', Value: {S: item.title}},
           id: {Action: 'PUT', Value: {N: item.id.toString()}},
           date_string: {Action: 'PUT', Value: {S: item.dateString}},
-          date: {Action: 'PUT', Value: {N: item.date.toString()}}//,
-          //campaign_id: {Action: 'PUT', Value: {NULL: true}},
-          //job_id: {Action: 'PUT', Value: {NULL: true}}
+          date: {Action: 'PUT', Value: {N: item.date.toString()}}
         },
         TableName: 'nasanews_settings',
         ReturnConsumedCapacity: 'NONE',
@@ -191,7 +190,7 @@ function notifyNewItem() {
       MessageAttributes: {},
       MessageStructure: 'json',
       Subject: 'NEW_NASANEWS_ITEM',
-      TopicArn: 'arn:aws:sns:us-west-2:138322507856:NasaNewsCreateCampaign'
+      TopicArn: SNSTopic
     };
     sns.publish(params, function(err, data) {
       if(err) {
@@ -241,15 +240,6 @@ function getLastItem() {
   });
 }
 
-//function getTotalCampaignPages() {
-//  return portatext
-//    .campaigns()
-//    .get()
-//    .then(function(result) {
-//      return result.data.total_pages;
-//    });
-//}
-
 function logInfo(msg) {
   log('INFO', msg);
 }
@@ -261,26 +251,6 @@ function logError(msg) {
 function log(level, msg) {
   console.log('[' + level + '] ' + msg);
 }
-
-//exports.cleanUpCampaigns = function(event, context, callback) {
-//  getTotalCampaignPages()
-//  .then(function(totalPages) {
-//    var promises = [];
-//    for(var i = 0; i < totalPages; i++) {
-//      promises.push(function() {
-//        var page = i;
-//        return portatext.campaigns.page(i).get().then(function(result) {
-//          console.log(result.data.campaigns);
-//        });
-//      });
-//    }
-//    return Promise.all(promises);
-//  }).catch(function(err) {
-//    logError(JSON.stringify(err));
-//    callback(err);
-//  });
-//};
-//
 
 exports.createCampaign = function(event, context, callback) {
   getLastItem().
@@ -426,18 +396,3 @@ exports.fetch = function(event, context, callback) {
     callback(err);
   });
 };
-
-//exports.createCampaign(null, null, function(err) {
-//  if(err) {
-//    return logError(err);
-//  }
-//  console.log('a');
-//});
-//
-//exports.fetch(null, null, function(err) {
-//  if(err) {
-//    return logError(err);
-//  }
-//  console.log('a');
-//
-//});
