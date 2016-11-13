@@ -28,8 +28,8 @@ This code uses:
 # How it works
 * Every day, **index.fetch** will be run by a [CloudWatch Event](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) and will
 download and parse the RSS feed, saving the latest in DynamoDB.
-* When a new item is detected, an event is sent through SNS that will be handled by **exports.createCampaign** and use the
-PortaText API to create a new campaign.
+* When a new item is detected, an event is sent through SNS that will be handled by **index.createCampaign** and use the
+[PortaText API](https://github.com/PortaText/docs/wiki/REST-API) to create a new campaign.
 * When a new campaign is created, PortaText will notify via SNS and **index.handleNotifications** will
 start this new campaign, so the news is sent to all the subscribers.
 * When a user sends NASANEWS to 32458, PortaText sends an opt-in notification via SNS.
