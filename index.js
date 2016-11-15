@@ -255,12 +255,6 @@ function log(level, msg) {
 exports.createCampaign = function(event, context, callback) {
   getLastItem().
   then(function(item) {
-    if(item.jobId !== null) {
-      logInfo(
-        'Not creating a new campaign id for item ' + JSON.stringify(item)
-      );
-      return null;
-    }
     logInfo('Creating a new campaign for item ' + item.id);
     return portatext
       .smsCampaign()
